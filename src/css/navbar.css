@@ -1,0 +1,49 @@
+.navbar {
+  height: 70px;
+  background-color: rgb(195, 54, 89);
+}
+
+.login {
+  text-transform: none !important;
+  border: 1px solid rgb(195, 54, 89) !important;
+}
+
+.login:hover {
+  border: 1px solid white !important;
+  transition: 500ms;
+}
+
+Button:focus {
+  outline: 0 !important;
+}
+
+.swift {
+  text-transform: none !important;
+}
+
+.swift:hover {
+  transition: 500ms;
+  background-color: rgb(195, 54, 89) !important;
+}
+
+.searchBar {
+  border: none;
+}
+
+.searchBar::placeholder {
+  color: white;
+  transition: 500ms;
+}
+
+/* .searchBar:hover::placeholder {
+  color: transparent;
+  transition: 500ms;
+} */
+
+.searchBar:focus::placeholder {
+  color: rgb(200, 200, 200);
+}
+
+.searchBar:focus {
+  outline: 0;
+}
