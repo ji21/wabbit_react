@@ -2,6 +2,7 @@ import Authenticated from './components/Authenticated'
 import Information from './components/Information'
 import Notfound from './components/Notfound'
 import Login from './components/Login'
+import Signup from './components/Signup'
 import Cookies from 'js-cookie';
 import {
   BrowserRouter as Router,
@@ -31,7 +32,10 @@ function App() {
             {/* redirect to home page if logged in */}
             {isAuthenticated() ? <Redirect to="/"/> : <Login/>}
           </Route>
-
+          <Route path="/signup/" exact>
+            {/* redirect to home page if logged in */}
+            {isAuthenticated() ? <Redirect to="/"/> : <Signup/>}
+          </Route>
           <Route path="/mywabbit/" exact>
             {isAuthenticated() ? <div>my wabbit page</div>:<div>you gotta log in</div>}
           </Route>

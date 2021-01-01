@@ -1,3 +1,7 @@
 .MuiButtonBase-root {
   background-color: transparent !important;
 }
+
+.MuiPickersDay-daySelected {
+  background-color: black !important;
+}
