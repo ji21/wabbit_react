@@ -58,9 +58,9 @@ export default class Main extends Component {
                 <div>/400</div>
               </div>
               <Button
-                disabled={this.state.text.length === 0 ? "true" : null}
+                disabled={this.state.text.length === 0 ? true : null}
                 onClick={this.postStory}
-                className="justify-self-end pl-4 pr-4 pt-2 pb-2 text-light m-3"
+                className="justify-self-end pl-4 pr-4 pt-2 pb-2 text-light m-3 red-btn"
               >
                 Share
               </Button>

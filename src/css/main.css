@@ -13,7 +13,7 @@ textarea:focus {
   outline: none;
 }
 
-Button {
+.red-btn {
   border-radius: 1.5rem !important;
   border: none;
   background-color: rgb(195, 54, 89) !important;

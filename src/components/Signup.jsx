@@ -16,6 +16,8 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import apiLink from "../api.js";
+import Cookies from "js-cookie";
 
 export default class Signup extends Component {
   state = {
@@ -30,7 +32,7 @@ export default class Signup extends Component {
     validName: true,
     validPassword: true,
     validUnique: true,
-    validBirthday: false,
+    validBirthday: true,
   };
 
   handleDateChange = (event) => {
@@ -83,10 +85,22 @@ export default class Signup extends Component {
     this.setState({ unique: event.target.value });
   };
 
-  signup = () => {
+  formateDate = () => {
+    var date = this.state.selectedDate;
+    let dateString;
+    if (date !== null) {
+      dateString = new Date(date.getTime() - date.getTimezoneOffset() * 60000)
+        .toISOString()
+        .split("T")[0];
+    }
+    return dateString;
+  };
+
+  create = () => {
+    console.log("calling create");
     const name = this.state.name;
     const password = this.state.password;
-    const birthday = this.state.birthday;
+    const birthday = this.formateDate();
     if (this.state.unique.includes("@")) {
       const email = this.state.unique;
       const data = {
@@ -95,6 +109,26 @@ export default class Signup extends Component {
         birthdate: birthday,
         password: password,
       };
+      console.log(data);
+      fetch(apiLink + "/users", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((res) => {
+          if (res.status === 500) {
+            this.setState({ error: true });
+            return;
+          } else {
+            return res.json();
+          }
+        })
+        .then((data) => {
+          // console.log(data);
+          // Cookies.set("user", { loggedIn: true, userId: data.insertId });
+          if (data !== null) this.setState({ redirect: true });
+        })
+        .catch((err) => console.log(err));
     } else {
       const phone = this.state.unique;
       const data = {
@@ -103,6 +137,7 @@ export default class Signup extends Component {
         birthdate: birthday,
         password: password,
       };
+      console.log(data);
     }
   };
 
@@ -209,7 +244,7 @@ export default class Signup extends Component {
         <div class="form-group d-flex justify-content-end">
           <Button
             className="pt-2 pb-2 pr-4 pl-4"
-            onClick={this.signup()}
+            onClick={this.create}
             disabled={
               this.state.validPassword &&
               this.state.validName &&

@@ -12,14 +12,18 @@ import {
 } from "react-router-dom";
 
 const getAccessToken = () => {
-  console.log(Cookies.get('access_token'));
-  return Cookies.get('access_token');
+  console.log(Cookies.get('user'));
+  return Cookies.get('user');
 }
 
 const isAuthenticated = () => {
-  return getAccessToken()? true : false;
+  const user = getAccessToken();
+  if (user && user.loggedIn) {
+    // make api call to the password, if success return true, else redirect to loggin page
+  } 
+  return false;
 }
-
+ 
 function App() {
   return (
     <div className="App">

@@ -10,6 +10,8 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import "../css/auth.css";
+import apiLink from "../api.js";
+import Cookies from "js-cookie";
 
 export default class Login extends Component {
   state = {
@@ -70,19 +72,28 @@ export default class Login extends Component {
       };
     }
     console.log(credientials);
-    fetch("http://localhost:5000/api/users", {
+    fetch(apiLink + "/users", {
       method: "POST",
       body: JSON.stringify(credientials),
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => {
-        if (res.status === 200) {
-          //set cookies
-
-          this.setState({ redirect: true });
-        } else {
+        if (res.status === 500) {
           this.setState({ error: true });
+          return;
         }
+        return res.json();
+      })
+      .then((data) => {
+        if (data !== null) {
+          // const obj = data[0];
+          // Cookies.set("user", {
+          //   loggedIn: true,
+          //   details: obj,
+          // });
+          this.setState({ redirect: true });
+        }
+        console.log(data[0]);
       })
       .catch((err) => console.log(err));
   };

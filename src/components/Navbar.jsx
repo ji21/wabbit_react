@@ -13,9 +13,9 @@ function Navbar() {
           className="text-decoration-none text-reset swift pl-4 pr-4
         pt-2 pl-2 text-left"
           style={{ fontSize: "26px", fontWeight: "700", width: "150px" }}
-          disableTouchRipple="true"
-          disableRipple="true"
-          disableFocusRipple="true"
+          disableTouchRipple={true}
+          disableRipple={true}
+          disableFocusRipple={true}
         >
           Swift
         </Button>
@@ -38,7 +38,7 @@ function Navbar() {
           color="secondary"
           className="text-light pl-4 pr-4 login h-75 text-right"
           size="large"
-          disableElevation="true"
+          disableElevation={true}
           style={{ fontSize: "13px", width: "150px" }}
         >
           My Wabbit
